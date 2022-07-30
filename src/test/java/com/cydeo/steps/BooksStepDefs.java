@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,7 @@ public class BooksStepDefs {
         actualCategoryList=BrowserUtil.getAllSelectOptions(bookPage.mainCategoryElement);
         actualCategoryList.remove(0);
         System.out.println("expectedCategoryList = " + actualCategoryList);
+        //BrowserUtil.waitFor(2);
     }
 
     @Then("user should be able to see following categories")
@@ -44,6 +46,23 @@ public class BooksStepDefs {
         System.out.println("bookName = " + bookName);
         BrowserUtil.waitForClickablility(bookPage.search, 5).sendKeys(bookName);
         BrowserUtil.waitForClickablility(bookPage.editBook(bookName), 5).click();
+
+    }
+
+
+    @Then("verify book categories must match book categories table from db")
+    public void verify_book_categories_must_match_book_categories_table_from_db() {
+
+     String query = "select name from book_categories;";
+
+     DB_Util.runQuery(query);
+
+     //store data
+
+        List<String> expectedCategoryList = DB_Util.getColumnDataAsList(1);
+
+        Assert.assertEquals(expectedCategoryList,actualCategoryList);
+
 
     }
 
