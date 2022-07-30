@@ -1,7 +1,6 @@
-@wip
 Feature: Dashboard Page
 
-  @db
+
 
 
   Scenario: Dashboard data test_01

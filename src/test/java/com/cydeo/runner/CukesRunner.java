@@ -8,6 +8,9 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
 
         plugin = {
+
+                "pretty",
+                "pretty","json:target/cucumber-report.json",
                 "html:target/cucumber-report.html",
                 "rerun:target/rerun.txt" ,
                 "me.jvt.cucumber.report.PrettyReports:target/cucumber"
@@ -15,7 +18,9 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features" ,
         glue = "com/cydeo/steps",
         dryRun = false,
-        tags = "@wip"
+        tags = "@wip",
+
+        publish = true
 )
 public class CukesRunner {
 }
